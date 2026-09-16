@@ -1,0 +1,48 @@
+---
+layout: '../layouts/BaseLayout.astro'
+title: "Important"
+---
+
+<div class="space-y-6">
+  <h1 class="text-3xl font-bold text-primary flex items-center gap-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-accent" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+    Important
+  </h1>
+  <p class="text-secondary">High-value findings that deserve attention</p>
+
+  <div class="space-y-4">
+    <a href="/findings/openai-gpt4o-mini" class="card block hover:border-accent/30">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="tag accent">AI</span>
+            <span class="text-sm text-muted font-mono">2026-09-16</span>
+          </div>
+          <h2 class="text-xl font-semibold text-primary mb-2">OpenAI GPT-4o Mini</h2>
+          <p class="text-secondary text-sm">A cost-efficient multimodal model with exceptional performance.</p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent mt-1" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      </div>
+    </a>
+
+    <a href="/findings/local-ai-ollama" class="card block hover:border-accent/30">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="tag accent">AI</span>
+            <span class="text-sm text-muted font-mono">2026-09-15</span>
+          </div>
+          <h2 class="text-xl font-semibold text-primary mb-2">Local AI with Ollama</h2>
+          <p class="text-secondary text-sm">Run AI models locally on your machine.</p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent mt-1" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      </div>
+    </a>
+  </div>
+</div>

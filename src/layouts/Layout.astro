@@ -1,0 +1,127 @@
+import { Search, Plus, Sparkles, FolderKanban, Globe, Lightbulb, Star, ExternalLink, Calendar, Tag, Activity } from 'lucide-astro';
+
+export default function Layout({ title, description, children }: { title: string; description?: string; children: import('astro').AstroComponent }) {
+  return (
+    <!DOCTYPE html>
+    <html lang="en" class="dark">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content={description || 'NEXUS - Personal Discovery & Knowledge OS'} />
+        <title>{title} | NEXUS</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+        <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+      </head>
+      <body class="min-h-screen bg-background">
+        {/* Subtle grid background */}
+        <div class="fixed inset-0 pointer-events-none opacity-[0.03]" style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }} />
+        
+        <div class="relative flex min-h-screen">
+          {/* Sidebar */}
+          <aside class="hidden md:flex w-64 flex-col border-r border-white/10 bg-surface/50 backdrop-blur-xl fixed h-full z-50">
+            <div class="p-6 border-b border-white/10">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
+                  <Activity class="w-4 h-4 text-accent" />
+                </div>
+                <div>
+                  <h1 class="font-semibold text-primary text-sm">NEXUS</h1>
+                  <p class="text-xs text-muted font-mono">v1.0.0</p>
+                </div>
+              </div>
+            </div>
+            
+            <nav class="flex-1 p-4 space-y-1">
+              <a href="/" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-secondary hover:text-primary hover:bg-white/5 transition-all">
+                <Search class="w-5 h-5" />
+                <span class="text-sm font-medium">Home</span>
+              </a>
+              <a href="/findings" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-secondary hover:text-primary hover:bg-white/5 transition-all">
+                <Sparkles class="w-5 h-5" />
+                <span class="text-sm font-medium">Findings</span>
+              </a>
+              <a href="/today" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-secondary hover:text-primary hover:bg-white/5 transition-all">
+                <Calendar class="w-5 h-5" />
+                <span class="text-sm font-medium">Today</span>
+              </a>
+              <a href="/important" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-secondary hover:text-primary hover:bg-white/5 transition-all">
+                <Star class="w-5 h-5" />
+                <span class="text-sm font-medium">Important</span>
+              </a>
+              <a href="/projects" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-secondary hover:text-primary hover:bg-white/5 transition-all">
+                <FolderKanban class="w-5 h-5" />
+                <span class="text-sm font-medium">Projects</span>
+              </a>
+              <a href="/library" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-secondary hover:text-primary hover:bg-white/5 transition-all">
+                <Globe class="w-5 h-5" />
+                <span class="text-sm font-medium">Library</span>
+              </a>
+              <a href="/ideas" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-secondary hover:text-primary hover:bg-white/5 transition-all">
+                <Lightbulb class="w-5 h-5" />
+                <span class="text-sm font-medium">Ideas</span>
+              </a>
+            </nav>
+            
+            <div class="p-4 border-t border-white/10">
+              <a href="/quick-add" class="btn-primary w-full justify-center text-sm">
+                <Plus class="w-4 h-4" />
+                Quick Add
+              </a>
+            </div>
+          </aside>
+          
+          {/* Main content */}
+          <main class="flex-1 md:ml-64">
+            {/* Header */}
+            <header class="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-white/10 px-6 py-4">
+              <div class="flex items-center justify-between max-w-7xl mx-auto">
+                <div class="flex items-center gap-4 md:hidden">
+                  <div class="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
+                    <Activity class="w-4 h-4 text-accent" />
+                  </div>
+                  <span class="font-semibold text-primary">NEXUS</span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-2 text-sm text-muted font-mono">
+                  <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  SYSTEM ONLINE
+                </div>
+                
+                <div class="flex items-center gap-4">
+                  <button class="btn-secondary text-sm px-4 py-2" onClick={() => window.open('/quick-add')}>
+                    <Plus class="w-4 h-4" />
+                    <span class="hidden sm:inline">Add New</span>
+                  </button>
+                </div>
+              </div>
+            </header>
+            
+            {/* Page content */}
+            <div class="px-6 py-8 max-w-7xl mx-auto">
+              {children}
+            </div>
+          </main>
+        </div>
+        
+        <script>
+          // Mobile menu toggle
+          document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.getElementById('nav-toggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (navToggle && sidebar) {
+              navToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('hidden');
+              });
+            }
+          });
+        </script>
+      </body>
+    </html>
+  );
+}

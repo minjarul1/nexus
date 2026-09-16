@@ -1,0 +1,45 @@
+---
+layout: '../layouts/BaseLayout.astro'
+title: "Projects"
+---
+
+<div class="space-y-6">
+  <h1 class="text-3xl font-bold text-primary">Projects</h1>
+  <p class="text-secondary">Active work and experiments</p>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <a href="#" class="card block hover:border-accent/30">
+      <div class="flex items-start justify-between mb-4">
+        <span class="tag accent">Development</span>
+        <span class="tag text-green-400 bg-green-400/10 border-green-400/30">Active</span>
+      </div>
+      <h2 class="text-xl font-semibold text-primary mb-2">NEXUS - Personal Knowledge OS</h2>
+      <p class="text-secondary text-sm mb-4">Personal discovery and knowledge operating system.</p>
+      <div class="w-full bg-surface-secondary rounded-full h-2 mb-2">
+        <div class="bg-accent h-2 rounded-full" style={{ width: '45%' }}></div>
+      </div>
+      <div class="flex items-center justify-between text-sm">
+        <span class="text-muted">45% complete</span>
+        <div class="flex gap-2">
+          <span class="tag text-xs">#astro</span>
+          <span class="tag text-xs">#tailwind</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  {/* Empty state */}
+  <div class="card text-center py-12">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-muted mx-auto mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+    </svg>
+    <h3 class="text-lg font-semibold text-primary mb-2">No More Projects</h3>
+    <p class="text-secondary text-sm mb-4">Your next project belongs here.</p>
+    <a href="/quick-add" class="btn-primary inline-flex">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Add Project
+    </a>
+  </div>
+</div>

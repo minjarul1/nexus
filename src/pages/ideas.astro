@@ -1,0 +1,37 @@
+---
+layout: '../layouts/BaseLayout.astro'
+title: "Ideas"
+---
+
+<div class="space-y-6">
+  <h1 class="text-3xl font-bold text-primary">Ideas</h1>
+  <p class="text-secondary">Raw thoughts and concepts</p>
+
+  <div class="space-y-4">
+    <div class="card">
+      <div class="flex items-start justify-between mb-3">
+        <div class="flex items-center gap-2">
+          <span class="tag accent">AI</span>
+          <span class="tag text-yellow-400 bg-yellow-400/10 border-yellow-400/30">Exploring</span>
+        </div>
+        <span class="text-xs text-muted font-mono">2026-09-16</span>
+      </div>
+      <h2 class="text-xl font-semibold text-primary mb-2">AI Research Assistant</h2>
+      <p class="text-secondary text-sm mb-3">An AI-powered tool to help researchers find and summarize papers.</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="tag text-xs">#ai</span>
+        <span class="tag text-xs">#research</span>
+        <span class="tag text-xs">#automation</span>
+      </div>
+    </div>
+
+    {/* Empty state */}
+    <div class="card text-center py-12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-muted mx-auto mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      </svg>
+      <h3 class="text-lg font-semibold text-primary mb-2">No Ideas Yet</h3>
+      <p class="text-secondary text-sm">Capture your next breakthrough idea here.</p>
+    </div>
+  </div>
+</div>

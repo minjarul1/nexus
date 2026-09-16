@@ -1,0 +1,46 @@
+---
+layout: '../layouts/BaseLayout.astro'
+title: "Today"
+---
+
+---
+const today = [
+  { time: '08:42', title: 'AI tool discovered', desc: 'OpenAI GPT-4o Mini release' },
+  { time: '10:15', title: 'GitHub project saved', desc: 'NEXUS knowledge system' },
+  { time: '12:37', title: 'Design reference saved', desc: 'Apple × Cyberpunk aesthetic' },
+  { time: '15:02', title: 'Automation idea', desc: 'Local AI pipeline' },
+  { time: '18:44', title: 'Research article', desc: 'Multimodal models 2026' },
+];
+---
+
+<div class="max-w-3xl space-y-6">
+  <h1 class="text-3xl font-bold text-primary">Today</h1>
+  
+  <div class="flex items-center gap-2 text-sm text-muted font-mono mb-8">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+    September 16, 2026
+  </div>
+
+  <div class="card">
+    <div class="space-y-6">
+      {today.map(item => (
+        <div class="flex gap-4">
+          <div class="flex flex-col items-center">
+            <span class="text-sm text-muted font-mono whitespace-nowrap">{item.time}</span>
+            <div class="w-px h-full bg-white/10 my-1"></div>
+          </div>
+          <div class="pb-6">
+            <div class="text-primary font-medium">{item.title}</div>
+            <div class="text-secondary text-sm">{item.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="text-center text-sm text-muted pt-4">
+    End of today's discoveries
+  </div>
+</div>

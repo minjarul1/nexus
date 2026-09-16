@@ -1,0 +1,113 @@
+---
+layout: '../layouts/BaseLayout.astro'
+title: "Quick Add"
+---
+
+<div class="max-w-2xl space-y-6">
+  <h1 class="text-3xl font-bold text-primary">Quick Add</h1>
+  <p class="text-secondary">Capture your discovery and generate Markdown</p>
+
+  <div class="card space-y-6">
+    <div>
+      <label class="block text-sm font-medium text-primary mb-2">Title</label>
+      <input type="text" id="title" class="input w-full" placeholder="What did you discover?" />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-primary mb-2">URL</label>
+      <input type="url" id="url" class="input w-full" placeholder="https://example.com" />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-primary mb-2">Description</label>
+      <textarea id="description" class="input w-full" rows="3" placeholder="Why is this important?"></textarea>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium text-primary mb-2">Category</label>
+        <select id="category" class="input w-full">
+          <option value="AI">AI</option>
+          <option value="Design">Design</option>
+          <option value="Development">Development</option>
+          <option value="Tools">Tools</option>
+          <option value="Research">Research</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-primary mb-2">Type</label>
+        <select id="type" class="input w-full">
+          <option value="finding">Finding</option>
+          <option value="project">Project</option>
+          <option value="website">Website</option>
+          <option value="idea">Idea</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-primary mb-2">Tags (comma separated)</label>
+      <input type="text" id="tags" class="input w-full" placeholder="ai, open-source, tool" />
+    </div>
+
+    <button id="generateBtn" class="btn-primary w-full justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+      </svg>
+      Generate Markdown
+    </button>
+  </div>
+
+  <div id="output" class="hidden">
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm text-muted font-mono">Generated Markdown</span>
+      <button id="copyBtn" class="btn-secondary text-sm px-3 py-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+        Copy
+      </button>
+    </div>
+    <textarea id="outputContent" class="input w-full font-mono text-sm" rows="15" readonly></textarea>
+  </div>
+</div>
+
+<script>
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    const title = document.getElementById('title').value;
+    const url = document.getElementById('url').value;
+    const description = document.getElementById('description').value;
+    const category = document.getElementById('category').value;
+    const type = document.getElementById('type').value;
+    const tags = document.getElementById('tags').value.split(',').map(t => t.trim()).filter(t => t);
+    
+    if (!title) {
+      alert('Please enter a title');
+      return;
+    }
+
+    const slug = title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const today = new Date().toISOString().split('T')[0];
+    
+    let frontmatter = `---\ntitle: "${title}"\ntype: "${type}"\ncategory: "${category}"\ntags:\n`;
+    tags.forEach(t => {
+      frontmatter += `  - "${t}"\n`;
+    });
+    frontmatter += `date: "${today}"\nimportance: "normal"\nstatus: "saved"\n`;
+    if (url) frontmatter += `url: "${url}"\n`;
+    frontmatter += `---\n\n# ${title}\n\n${description || 'No description provided.'}\n\n## Why I Saved This\n\nPersonal explanation.\n\n## Key Findings\n\n- Finding one\n- Finding two\n\n## Personal Notes\n\nMy notes.\n\n## Related\n\n- Related topic`;
+
+    document.getElementById('outputContent').value = frontmatter;
+    document.getElementById('output').classList.remove('hidden');
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const content = document.getElementById('outputContent').value;
+    navigator.clipboard.writeText(content);
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => {
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>Copy';
+    }, 2000);
+  });
+</script>

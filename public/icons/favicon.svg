@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
+console.log(`NEXUS v${pkg.version}`);
