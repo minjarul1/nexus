@@ -3,16 +3,6 @@ layout: '../layouts/BaseLayout.astro'
 title: "Today"
 ---
 
----
-const today = [
-  { time: '08:42', title: 'AI tool discovered', desc: 'OpenAI GPT-4o Mini release' },
-  { time: '10:15', title: 'GitHub project saved', desc: 'NEXUS knowledge system' },
-  { time: '12:37', title: 'Design reference saved', desc: 'Apple x Cyberpunk aesthetic' },
-  { time: '15:02', title: 'Automation idea', desc: 'Local AI pipeline' },
-  { time: '18:44', title: 'Research article', desc: 'Multimodal models 2026' },
-];
----
-
 <div class="max-w-3xl space-y-6">
   <h1 class="text-3xl font-bold text-primary">Today</h1>
   
@@ -24,19 +14,42 @@ const today = [
   </div>
 
   <div class="card">
-    <div class="space-y-6">
-      {today.map(item => (
-        <div class="flex gap-4">
-          <div class="flex flex-col items-center">
-            <span class="text-sm text-muted font-mono whitespace-nowrap">{item.time}</span>
-            <div class="w-px h-full bg-white/10 my-1"></div>
-          </div>
-          <div class="pb-6">
-            <div class="text-primary font-medium">{item.title}</div>
-            <div class="text-secondary text-sm">{item.desc}</div>
-          </div>
+    <div class="space-y-4">
+      <div class="flex gap-4">
+        <span class="text-muted font-mono text-sm">08:42</span>
+        <div class="flex-1">
+          <div class="text-primary">AI tool discovered</div>
+          <div class="text-secondary text-sm">OpenAI GPT-4o Mini release</div>
         </div>
-      ))}
+      </div>
+      <div class="flex gap-4">
+        <span class="text-muted font-mono text-sm">10:15</span>
+        <div class="flex-1">
+          <div class="text-primary">GitHub project saved</div>
+          <div class="text-secondary text-sm">NEXUS knowledge system</div>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <span class="text-muted font-mono text-sm">12:37</span>
+        <div class="flex-1">
+          <div class="text-primary">Design reference saved</div>
+          <div class="text-secondary text-sm">Apple Cyberpunk aesthetic</div>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <span class="text-muted font-mono text-sm">15:02</span>
+        <div class="flex-1">
+          <div class="text-primary">Automation idea</div>
+          <div class="text-secondary text-sm">Local AI pipeline</div>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <span class="text-muted font-mono text-sm">18:44</span>
+        <div class="flex-1">
+          <div class="text-primary">Research article</div>
+          <div class="text-secondary text-sm">Multimodal models 2026</div>
+        </div>
+      </div>
     </div>
   </div>
 
