@@ -146,3 +146,4 @@ MIT License - Feel free to use this for your own knowledge system.
 ---
 
 Built with ❤️ by Minjarul
+# Nexus - Personal Knowledge OS
