@@ -44,6 +44,15 @@ const findings: Finding[] = [
     date: '2026-09-19',
     importance: 'medium',
     url: 'https://github.com/NaeemBolchhi/Get-Office-365'
+  },
+  {
+    slug: 'ext-torrents',
+    title: 'EXT.to - Torrent Search Engine',
+    category: 'Tools',
+    tags: ['torrent', 'search', 'downloads'],
+    date: '2026-09-19',
+    importance: 'low',
+    url: 'https://ext.to/'
   }
 ];
 
