@@ -69,6 +69,16 @@ const findings: Finding[] = [
     date: '2026-09-19',
     importance: 'medium',
     url: 'https://github.com/alienator88/Pearcleaner'
+  },
+  {
+    slug: 'tasteskill',
+    title: 'Taste Skill - Anti-Slop Frontend Framework',
+    category: 'Tools',
+    platform: 'Cross-platform',
+    tags: ['tasteskill', 'anti-slop', 'frontend', 'cursor', 'claude-code'],
+    date: '2026-09-19',
+    importance: 'high',
+    url: 'https://tasteskill.dev'
   }
 ];
 
