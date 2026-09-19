@@ -3,320 +3,151 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getFindings } from '../lib/collections/findings';
 import type { Finding } from '../lib/collections/findings';
 const findings = getFindings();
+const latest = findings.slice(0, 6);
 const categories = [...new Set(findings.map(f => f.category))];
-const platforms = [...new Set(findings.map(f => f.platform).filter(Boolean))];
-const stats = {
-  findings: findings.length,
-  projects: 7,
-  websites: 12,
-  thisWeek: findings.filter(f => {
-    const date = new Date(f.date);
-    const weekAgo = new Date();
-    weekAgo.setDate(weekAgo.getDate() - 7);
-    return date >= weekAgo;
-  }).length
-};
 ---
 
-<BaseLayout title="NEXUS - Personal Discovery OS" description="Capture what you discover. Connect what you know.">
-<div class="space-y-12">
-  {/* Hero Section with Logo Placeholder */}
-  <div class="text-center py-12">
-    {/* Logo Area - Replace with actual logo when provided */}
-    <div class="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/30 mb-6 relative group cursor-pointer hover:border-accent/50 transition-all">
-      {/* Placeholder icon */}
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-      {/* Hover hint */}
-      <div class="absolute inset-0 rounded-2xl bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-        <span class="text-xs text-accent font-mono">LOGO</span>
+<BaseLayout>
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    {/* Hero Section */}
+    <div class="text-center mb-20 space-y-8">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-mono">
+        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+        Knowledge Base v1.0
+      </div>
+      
+      <h1 class="text-5xl md:text-7xl font-bold text-primary tracking-tight">
+        Your Second
+        <span class="bg-gradient-to-r from-accent to-violet-400 bg-clip-text text-transparent"> Brain</span>
+      </h1>
+      
+      <p class="text-xl md:text-2xl text-secondary max-w-3xl mx-auto leading-relaxed">
+        A curated knowledge base for discoveries worth remembering. Track tools, insights, and ideas across your journey.
+      </p>
+      
+      <div class="flex flex-wrap justify-center gap-4 pt-4">
+        <a href="/nexus/findings" class="group inline-flex items-center gap-3 px-8 py-4 bg-accent hover:bg-accent/90 text-primary font-semibold rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-xl hover:shadow-accent/20">
+          Explore Findings
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+        <a href="#latest" class="inline-flex items-center gap-2 px-8 py-4 border border-white/10 hover:bg-white/5 text-primary font-semibold rounded-xl transition-all duration-200 hover:scale-105">
+          Browse Archive
+        </a>
+      </div>
+      
+      {/* Stats */}
+      <div class="grid grid-cols-3 gap-8 max-w-lg mx-auto pt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary">{findings.length}</div>
+          <div class="text-sm text-muted">Findings</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary">{categories.length}</div>
+          <div class="text-sm text-muted">Categories</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary">2026</div>
+          <div class="text-sm text-muted">Active</div>
+        </div>
       </div>
     </div>
-    
-    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 text-accent text-sm font-mono mb-4">
-      <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-      PERSONAL KNOWLEDGE OS
-    </div>
-    <h1 class="text-6xl md:text-8xl font-bold text-primary mb-4 tracking-tight">
-      NEXUS
-    </h1>
-    <p class="text-xl text-secondary max-w-2xl mx-auto mb-8">
-      Capture what you discover. Connect what you know.
-    </p>
-    
-    {/* Search Bar */}
-    <div class="max-w-2xl mx-auto relative">
-      <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-      </div>
-      <input 
-        type="text" 
-        id="search-input"
-        placeholder="Search your knowledge..." 
-        class="input w-full pl-12 pr-4 py-4 text-base"
-        autocomplete="off"
-      />
-      <div id="search-results" class="absolute top-full left-0 right-0 mt-2 bg-surface border border-white/10 rounded-xl shadow-2xl max-h-96 overflow-y-auto hidden z-50">
-        {/* Results will be injected here */}
-      </div>
-      <div class="text-xs text-muted font-mono mt-2">
-        Press <kbd class="px-2 py-0.5 bg-surface-secondary rounded text-muted">/</kbd> to search · <kbd class="px-2 py-0.5 bg-surface-secondary rounded text-muted">Esc</kbd> to close
-      </div>
-    </div>
-  </div>
 
-  {/* Stats */}
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div class="card text-center group hover:border-accent/30 transition-all cursor-pointer">
-      <div class="stat-value">{stats.findings}</div>
-      <div class="stat-label">Findings</div>
-    </div>
-    <div class="card text-center group hover:border-accent/30 transition-all cursor-pointer">
-      <div class="stat-value">{stats.projects}</div>
-      <div class="stat-label">Projects</div>
-    </div>
-    <div class="card text-center group hover:border-accent/30 transition-all cursor-pointer">
-      <div class="stat-value">{stats.websites}</div>
-      <div class="stat-label">Websites</div>
-    </div>
-    <div class="card text-center group hover:border-accent/30 transition-all cursor-pointer">
-      <div class="stat-value">{stats.thisWeek}</div>
-      <div class="stat-label">This Week</div>
-    </div>
-  </div>
+    {/* Categories */}
+    <section class="mb-16">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-bold text-primary">Categories</h2>
+        <a href="/nexus/findings" class="text-sm text-accent hover:underline">View all</a>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {categories.map((cat: string, idx: number) => {
+          const colors = ['from-cyan-500 to-blue-600', 'from-purple-500 to-violet-600', 'from-emerald-500 to-teal-600'];
+          const catCount = findings.filter(f => f.category === cat).length;
+          return (
+            <a href={`/nexus/findings?category=${encodeURIComponent(cat)}`} 
+               class="group p-6 rounded-2xl border border-white/10 bg-surface-carbon/50 backdrop-blur-xl hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div class={`w-12 h-12 rounded-xl bg-gradient-to-br ${colors[idx % colors.length]} mb-4 group-hover:scale-110 transition-transform`}></div>
+              <div class="text-lg font-semibold text-primary mb-1">{cat}</div>
+              <div class="text-sm text-muted">{catCount} {catCount === 1 ? 'finding' : 'findings'}</div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
 
-  {/* Quick Filter Buttons */}
-  <div class="flex flex-wrap gap-3 justify-center">
-    <button class="filter-btn active" data-filter="all">All</button>
-    {categories.map(cat => (
-      <button class="filter-btn" data-filter={cat}>{cat}</button>
-    ))}
-    <button class="filter-btn" data-filter="macOS">macOS</button>
-    <button class="filter-btn" data-filter="Windows">Windows</button>
-    <button class="filter-btn" data-filter="Cross-platform">Cross-platform</button>
-  </div>
-
-  {/* Recent Discoveries */}
-  <div>
-    <h2 class="section-title flex items-center gap-2 mb-6">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-      Recent Discoveries
-    </h2>
-    <div id="findings-grid" class="grid gap-4">
-      {findings.map((finding: Finding) => (
-        <a href={`https://minjarul1.github.io/nexus/findings/${finding.slug}`} class="card hover:border-accent/30 transition-all finding-item" data-category={finding.category} data-platform={finding.platform}>
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-                <span class="tag accent">{finding.category}</span>
-                {finding.platform && <span class="tag">{finding.platform}</span>}
-                <span class="text-xs text-muted font-mono">{finding.date}</span>
+    {/* Latest Findings */}
+    <section id="latest" class="mb-16">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-bold text-primary">Latest Findings</h2>
+        <a href="/nexus/findings" class="text-sm text-accent hover:underline">View all</a>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {latest.map((f: Finding) => {
+          const categoryColors = {
+            'AI': 'from-purple-500 to-violet-600',
+            'Tools': 'from-cyan-500 to-blue-600',
+            'Projects': 'from-emerald-500 to-teal-600',
+          };
+          const categoryBg = {
+            'AI': 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+            'Tools': 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+            'Projects': 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+          };
+          return (
+            <a href={`/nexus/findings/${f.slug}`} 
+               class="group p-6 rounded-2xl border border-white/10 bg-surface-carbon/50 backdrop-blur-xl hover:border-white/20 transition-all duration-300 hover:scale-105">
+              <div class="flex items-start justify-between mb-4">
+                <span class={`px-3 py-1 rounded-full text-xs font-semibold border ${categoryBg[f.category]}`}>
+                  {f.category}
+                </span>
+                <span class="text-xs text-muted font-mono">{f.date}</span>
               </div>
-              <h3 class="text-lg font-semibold text-primary mb-1">{finding.title}</h3>
-              <div class="flex flex-wrap gap-2 mt-2">
-                {finding.tags.slice(0, 3).map((tag: string) => (
-                  <span class="tag text-xs">{tag}</span>
+              <h3 class="text-xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">{f.title}</h3>
+              <p class="text-sm text-secondary line-clamp-2">{f.description}</p>
+              <div class="flex flex-wrap gap-2 mt-4">
+                {f.tags.slice(0, 3).map((tag: string) => (
+                  <span class="text-xs px-2 py-1 rounded-md bg-white/5 text-muted">{tag}</span>
                 ))}
               </div>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-muted ml-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-        </a>
-      ))}
-    </div>
-    <div id="no-results" class="hidden text-center py-12 text-muted">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      <p>No results found</p>
-    </div>
-  </div>
-
-  {/* Today */}
-  <div>
-    <h2 class="section-title flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-      Today
-    </h2>
-    <div class="card">
-      <div class="space-y-4">
-        <div class="flex gap-4">
-          <span class="text-muted font-mono text-sm">08:42</span>
-          <div class="flex-1">
-            <div class="text-primary">Added FileSync finding</div>
-            <div class="text-secondary text-sm">New tool discovered</div>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <span class="text-muted font-mono text-sm">10:15</span>
-          <div class="flex-1">
-            <div class="text-primary">GitHub project updated</div>
-            <div class="text-secondary text-sm">NEXUS knowledge system</div>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <span class="text-muted font-mono text-sm">14:30</span>
-          <div class="flex-1">
-            <div class="text-primary">Added Pearcleaner</div>
-            <div class="text-secondary text-sm">macOS app cleaner tool</div>
-          </div>
-        </div>
+            </a>
+          );
+        })}
       </div>
-    </div>
+    </section>
+
+    {/* Quick Links */}
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a href="/nexus/findings" class="p-6 rounded-2xl border border-white/10 bg-surface-carbon/50 backdrop-blur-xl hover:border-accent/30 transition-all duration-300 group">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-primary mb-2">Search Findings</h3>
+        <p class="text-sm text-secondary">Browse through {findings.length} curated discoveries</p>
+      </a>
+      
+      <a href="/nexus/roadmap" class="p-6 rounded-2xl border border-white/10 bg-surface-carbon/50 backdrop-blur-xl hover:border-accent/30 transition-all duration-300 group">
+        <div class="w-12 h-12 rounded-xl bg-violet-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-primary mb-2">Roadmap</h3>
+        <p class="text-sm text-secondary">Track upcoming features and improvements</p>
+      </a>
+      
+      <a href="/nexus/about" class="p-6 rounded-2xl border border-white/10 bg-surface-carbon/50 backdrop-blur-xl hover:border-accent/30 transition-all duration-300 group">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-primary mb-2">About</h3>
+        <p class="text-sm text-secondary">Learn about Nexus and how to contribute</p>
+      </a>
+    </section>
   </div>
-</div>
-
-<script>
-  // Search functionality
-  const searchInput = document.getElementById('search-input');
-  const searchResults = document.getElementById('search-results');
-  const findingsGrid = document.getElementById('findings-grid');
-  const noResults = document.getElementById('no-results');
-  
-  const allFindings = [
-    { slug: 'openai-gpt4o-mini', title: 'OpenAI GPT-4o Mini', category: 'AI', platform: 'Cross-platform', tags: ['ai', 'openai', 'multimodal'] },
-    { slug: 'local-ai-ollama', title: 'Local AI with Ollama', category: 'AI', platform: 'Cross-platform', tags: ['ai', 'local'] },
-    { slug: 'filesync-app', title: 'FileSync', category: 'Tools', platform: 'Cross-platform', tags: ['filesync', 'cloud-storage'] },
-    { slug: 'get-office-365', title: 'Get Office 365', category: 'Tools', platform: 'Windows', tags: ['office365', 'windows'] },
-    { slug: 'ext-torrents', title: 'EXT.to', category: 'Tools', platform: 'Cross-platform', tags: ['torrent', 'search'] },
-    { slug: 'pearcleaner', title: 'Pearcleaner', category: 'Tools', platform: 'macOS', tags: ['macOS', 'cleaner'] }
-  ];
-
-  // Keyboard shortcut
-  document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement !== searchInput) {
-      e.preventDefault();
-      searchInput.focus();
-    }
-    if (e.key === 'Escape') {
-      searchInput.blur();
-      searchResults.classList.add('hidden');
-    }
-  });
-
-  // Search input handler
-  searchInput.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase().trim();
-    
-    if (query.length === 0) {
-      searchResults.classList.add('hidden');
-      return;
-    }
-
-    const results = allFindings.filter(f => 
-      f.title.toLowerCase().includes(query) ||
-      f.category.toLowerCase().includes(query) ||
-      f.tags.some(tag => tag.toLowerCase().includes(query))
-    );
-
-    if (results.length === 0) {
-      searchResults.innerHTML = '<div class="p-4 text-muted text-sm">No results found</div>';
-    } else {
-      searchResults.innerHTML = results.map(f => `
-        <a href="/nexus/findings/${f.slug}" class="block p-4 hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors">
-          <div class="flex items-center gap-3">
-            <span class="tag accent text-xs">${f.category}</span>
-            ${f.platform ? `<span class="tag text-xs">${f.platform}</span>` : ''}
-            <div class="flex-1">
-              <div class="text-primary font-medium">${f.title}</div>
-              <div class="text-xs text-muted mt-1">${f.tags.join(' · ')}</div>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-        </a>
-      `).join('');
-    }
-    
-    searchResults.classList.remove('hidden');
-  });
-
-  // Close search when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-      searchResults.classList.add('hidden');
-    }
-  });
-
-  // Filter buttons
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const findingItems = document.querySelectorAll('.finding-item');
-  
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Update active state
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      
-      const filter = btn.dataset.filter;
-      
-      findingItems.forEach(item => {
-        const category = item.dataset.category;
-        const platform = item.dataset.platform;
-        
-        if (filter === 'all' || category === filter || platform === filter) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
-      });
-      
-      // Show/hide no results message
-      const visibleItems = document.querySelectorAll('.finding-item:not(.hidden)');
-      if (visibleItems.length === 0) {
-        noResults?.classList.remove('hidden');
-      } else {
-        noResults?.classList.add('hidden');
-      }
-    });
-  });
-</script>
-
-<style>
-  .filter-btn {
-    padding: 8px 20px;
-    border-radius: 9999px;
-    font-size: 14px;
-    font-family: 'JetBrains Mono', monospace;
-    background: #111720;
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #8B95A5;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  
-  .filter-btn:hover {
-    border-color: rgba(255,255,255,0.3);
-    color: #F5F7FA;
-  }
-  
-  .filter-btn.active {
-    background: rgba(0,229,255,0.1);
-    border-color: rgba(0,229,255,0.3);
-    color: #00E5FF;
-  }
-  
-  #search-input:focus {
-    border-color: rgba(0,229,255,0.5);
-    box-shadow: 0 0 0 1px rgba(0,229,255,0.5);
-  }
-  
-  .finding-item {
-    transition: all 0.2s;
-  }
-  
-  .finding-item.hidden {
-    display: none;
-  }
-</style>
 </BaseLayout>
