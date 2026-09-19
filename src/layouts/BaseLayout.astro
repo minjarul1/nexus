@@ -11,7 +11,7 @@ const { title, description = 'NEXUS - Personal Discovery & Knowledge OS' } = Ast
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -84,6 +84,83 @@ const { title, description = 'NEXUS - Personal Discovery & Knowledge OS' } = Ast
       .stat-label { font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; color: var(--text-muted); text-transform: uppercase; }
       
       .section-title { font-size: 22px; font-weight: 600; color: var(--text-primary); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+      
+      /* Theme Toggle */
+      .theme-toggle {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-subtle);
+        background: rgba(255,255,255,0.04);
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.12s;
+      }
+      .theme-toggle:hover {
+        border-color: rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.06);
+        color: var(--text-primary);
+      }
+      [data-theme="light"] .theme-toggle .icon-moon,
+      [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+      [data-theme="light"] .theme-toggle .icon-sun { display: flex; }
+      
+      /* Light Theme */
+      [data-theme="light"] {
+        --bg-void: #F8FAFC;
+        --bg-deep: #F1F5F9;
+        --surface-carbon: #FFFFFF;
+        --surface-graphite: #F8FAFC;
+        --surface-slate: #F1F5F9;
+        --text-primary: #0F172A;
+        --text-secondary: #475569;
+        --text-muted: #94A3B8;
+        --accent-cyan: #0891B2;
+        --accent-violet: #7C3AED;
+        --border-subtle: rgba(0,0,0,0.08);
+        --border-hover: rgba(8,145,178,0.3);
+      }
+      [data-theme="light"] .grid-bg {
+        opacity: 0.015;
+        background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+      }
+      [data-theme="light"] .card {
+        background: var(--surface-carbon);
+        border-color: var(--border-subtle);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+      [data-theme="light"] .card:hover {
+        box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+      }
+      [data-theme="light"] .input {
+        background: var(--surface-carbon);
+        color: var(--text-primary);
+        border-color: var(--border-subtle);
+      }
+      [data-theme="light"] .input:focus {
+        border-color: rgba(8,145,178,0.5);
+        box-shadow: 0 0 0 1px rgba(8,145,178,0.5);
+      }
+      [data-theme="light"] .nav-item.active {
+        background: rgba(8,145,178,0.1);
+        border-color: rgba(8,145,178,0.25);
+      }
+      [data-theme="light"] .tag {
+        background: rgba(0,0,0,0.04);
+        color: var(--text-muted);
+      }
+      [data-theme="light"] .tag.accent {
+        background: rgba(8,145,178,0.1);
+        border-color: rgba(8,145,178,0.3);
+        color: var(--accent-cyan);
+      }
+      [data-theme="light"] .glass {
+        background: rgba(248,250,252,0.85);
+      }
     </style>
   </head>
   <body>
@@ -95,5 +172,17 @@ const { title, description = 'NEXUS - Personal Discovery & Knowledge OS' } = Ast
         <slot />
       </main>
     </div>
+    <script>
+      // Theme initialization
+      const savedTheme = localStorage.getItem('nexus-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      if (savedTheme === 'light') {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      }
+    </script>
   </body>
 </html>
