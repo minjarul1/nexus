@@ -1,38 +1,59 @@
 ---
-layout: '../layouts/BaseLayout.astro'
-title: "Findings"
+import { getFindings, getCategories, getPlatforms } from '../../lib/collections/findings';
+import type { Finding } from '../../lib/collections/findings';
+const findings = getFindings();
+const categories = getCategories();
+const platforms = getPlatforms();
 ---
 
-<div class="space-y-6">
+<div class="space-y-8">
   <h1 class="text-3xl font-bold text-primary">Findings</h1>
   
-  <div class="card">
-    <a href="/findings/openai-gpt4o-mini" class="block hover:border-accent/30">
-      <div class="flex items-start justify-between">
-        <div>
-          <div class="flex items-center gap-2 mb-2">
-            <span class="tag accent">AI</span>
-            <span class="text-sm text-muted font-mono">2026-09-16</span>
-          </div>
-          <h2 class="text-xl font-semibold text-primary mb-2">OpenAI GPT-4o Mini</h2>
-          <p class="text-secondary text-sm">A cost-efficient multimodal model with exceptional performance.</p>
-        </div>
-      </div>
-    </a>
+  {/* Category Filter */}
+  <div class="flex flex-wrap gap-2 p-4 card">
+    <span class="text-sm text-muted font-mono mr-2">Category:</span>
+    <a href="/nexus/findings" class="tag accent">All ({findings.length})</a>
+    {categories.map(cat => {
+      const count = findings.filter(f => f.category === cat).length;
+      return <a href={`/nexus/findings?category=${cat}`} class="tag">{cat} ({count})</a>;
+    })}
   </div>
   
-  <div class="card">
-    <a href="/findings/local-ai-ollama" class="block hover:border-accent/30">
-      <div class="flex items-start justify-between">
-        <div>
-          <div class="flex items-center gap-2 mb-2">
-            <span class="tag accent">AI</span>
-            <span class="text-sm text-muted font-mono">2026-09-15</span>
+  {/* Platform Filter */}
+  <div class="flex flex-wrap gap-2 p-4 card">
+    <span class="text-sm text-muted font-mono mr-2">Platform:</span>
+    <a href="/nexus/findings" class="tag accent">All</a>
+    {platforms.map(platform => {
+      const count = findings.filter(f => f.platform === platform).length;
+      return <a href={`/nexus/findings?platform=${platform}`} class="tag">{platform} ({count})</a>;
+    })}
+  </div>
+  
+  {/* Findings List */}
+  <div class="space-y-4">
+    {findings.map((finding: Finding) => (
+      <div class="card hover:border-accent/30 transition-all">
+        <a href={`https://minjarul1.github.io/nexus/findings/${finding.slug}`} class="block p-4">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
+                <span class="tag accent">{finding.category}</span>
+                {finding.platform && <span class="tag">{finding.platform}</span>}
+                <span class="text-xs text-muted font-mono">{finding.date}</span>
+              </div>
+              <h2 class="text-lg font-semibold text-primary mb-1">{finding.title}</h2>
+              <div class="flex flex-wrap gap-2 mt-2">
+                {finding.tags.slice(0, 3).map((tag: string) => (
+                  <span class="tag text-xs">{tag}</span>
+                ))}
+              </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-muted flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
           </div>
-          <h2 class="text-xl font-semibold text-primary mb-2">Local AI with Ollama</h2>
-          <p class="text-secondary text-sm">Run AI models locally on your machine.</p>
-        </div>
+        </a>
       </div>
-    </a>
+    ))}
   </div>
 </div>
