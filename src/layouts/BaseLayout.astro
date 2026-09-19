@@ -39,11 +39,11 @@ const { title, description = 'NEXUS - Personal Discovery & Knowledge OS' } = Ast
         --radius-lg: 16px;
         --radius-md: 10px;
       }
-      
+
       * { border-color: var(--border-subtle); }
       body { background: var(--bg-void); color: var(--text-primary); font-family: 'Inter', system-ui, sans-serif; }
       ::selection { background: rgba(0,229,255,0.2); color: #00E5FF; }
-      
+
       .grid-bg {
         position: fixed;
         inset: 0;
@@ -54,37 +54,37 @@ const { title, description = 'NEXUS - Personal Discovery & Knowledge OS' } = Ast
         background-size: 40px 40px;
         z-index: 0;
       }
-      
+
       .main-content { margin-left: 260px; min-height: 100vh; position: relative; z-index: 1; }
       @media (max-width: 1024px) { .main-content { margin-left: 0; } }
-      
+
       .card { background: var(--surface-carbon); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 24px; transition: all 0.2s; }
       .card:hover { border-color: rgba(255,255,255,0.15); box-shadow: 0 20px 60px rgba(0,0,0,0.35); transform: translateY(-2px); }
-      
+
       .btn-primary { background: var(--accent-cyan); color: var(--bg-void); padding: 12px 24px; border-radius: var(--radius-md); font-weight: 500; transition: all 0.12s; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; text-decoration: none; }
       .btn-primary:hover { background: #00d4e6; transform: translateY(-1px); }
-      
+
       .btn-secondary { background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 12px 24px; border-radius: var(--radius-md); font-weight: 500; transition: all 0.12s; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
       .btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); }
-      
+
       .tag { display: inline-flex; align-items: center; padding: 5px 9px; border-radius: 9999px; font-size: 11px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); color: var(--text-muted); transition: all 0.12s; }
       .tag:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
       .tag.accent { background: rgba(0,229,255,0.1); border-color: rgba(0,229,255,0.3); color: var(--accent-cyan); }
-      
+
       .input { background: var(--surface-carbon); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 12px 16px; color: var(--text-primary); outline: none; transition: all 0.12s; width: 100%; }
       .input:focus { border-color: rgba(0,229,255,0.5); box-shadow: 0 0 0 1px rgba(0,229,255,0.5), 0 0 30px rgba(0,229,255,0.08); }
       .input::placeholder { color: #5F6875; }
-      
+
       .nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: var(--radius-md); color: var(--text-muted); transition: all 0.12s; text-decoration: none; position: relative; }
       .nav-item:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
       .nav-item.active { color: var(--text-primary); background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.18); }
       .nav-item.active::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 20px; background: var(--accent-cyan); border-radius: 0 2px 2px 0; }
-      
+
       .stat-value { font-size: 48px; font-weight: 600; color: var(--text-primary); line-height: 1; margin-bottom: 8px; }
       .stat-label { font-size: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; color: var(--text-muted); text-transform: uppercase; }
-      
+
       .section-title { font-size: 22px; font-weight: 600; color: var(--text-primary); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
-      
+
       /* Theme Toggle */
       .theme-toggle {
         width: 40px;
@@ -107,7 +107,7 @@ const { title, description = 'NEXUS - Personal Discovery & Knowledge OS' } = Ast
       [data-theme="light"] .theme-toggle .icon-moon,
       [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
       [data-theme="light"] .theme-toggle .icon-sun { display: flex; }
-      
+
       /* Light Theme */
       [data-theme="light"] {
         --bg-void: #F8FAFC;
@@ -165,9 +165,9 @@ const { title, description = 'NEXUS - Personal Discovery & Knowledge OS' } = Ast
   </head>
   <body>
     <div class="grid-bg"></div>
-    {@render Sidebar()}
+    <Sidebar />
     <div class="main-content">
-      {@render Header()}
+      <Header />
       <main class="px-6 py-8 max-w-7xl mx-auto">
         <slot />
       </main>
