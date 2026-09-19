@@ -1,0 +1,96 @@
+---
+layout: '../../layouts/BaseLayout.astro'
+title: "Get Office 365 - Simple Installation Script"
+---
+
+<article class="max-w-3xl space-y-8">
+  {/* Back button */}
+  <a href="/findings" class="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+    Back to Findings
+  </a>
+
+  {/* Header */}
+  <div>
+    <div class="flex items-center gap-3 mb-4">
+      <span class="tag accent">Tools</span>
+      <span class="text-sm text-muted font-mono">2026-09-19</span>
+    </div>
+    <h1 class="text-4xl font-bold text-primary mb-4">Get Office 365</h1>
+    <div class="flex items-center gap-4 text-sm text-muted">
+      <span class="flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+        Source: GitHub
+      </span>
+      <a href="https://github.com/NaeemBolchhi/Get-Office-365" target="_blank" class="flex items-center gap-1 text-accent hover:underline">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+
+  {/* Content */}
+  <div class="prose prose-invert max-w-none">
+    <p class="text-lg text-secondary leading-relaxed">
+      A simple PowerShell one-liner to automatically install Office 365 (Word, Excel, PowerPoint) on Windows 10/11. Created by NaeemBolchhi, a university lecturer and hobbyist developer.
+    </p>
+    
+    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
+      Key Features
+    </h2>
+    <ul class="space-y-2 text-secondary">
+      <li class="flex items-start gap-2">
+        <span class="text-accent">-</span>
+        <span>Single PowerShell command for automatic installation</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-accent">-</span>
+        <span>Includes Word, Excel, and PowerPoint</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-accent">-</span>
+        <span>Preconfigured Configuration.xml for easy deployment</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-accent">-</span>
+        <span>Alternative method using Office Tool Plus</span>
+      </li>
+    </ul>
+    
+    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
+      Installation Command
+    </h2>
+    <pre class="bg-surface-secondary p-4 rounded-lg font-mono text-sm"><code>irm https://naeembolchhi.github.io/Get-Office-365/GO365.ps1 | iex</code></pre>
+    
+    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
+      About the Creator
+    </h2>
+    <p class="text-secondary">
+      NaeemBolchhi is a university English lecturer who builds small, sharp tools as a hobby. This project was created to address educational access issues — "Piracy is a necessary evil when inaccessibility is weaponized to restrict education."
+    </p>
+  </div>
+
+  {/* Tags */}
+  <div class="pt-6 border-t border-white/10">
+    <div class="flex flex-wrap gap-2">
+      <span class="tag accent">#office365</span>
+      <span class="tag accent">#windows</span>
+      <span class="tag accent">#powershell</span>
+      <span class="tag accent">#education</span>
+    </div>
+  </div>
+
+  {/* Meta */}
+  <div class="text-sm text-muted font-mono pt-4">
+    <div class="flex items-center gap-4">
+      <span>DISCOVERED: 2026-09-19</span>
+      <span>NX-004</span>
+    </div>
+  </div>
+</article>
