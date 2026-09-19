@@ -2,6 +2,8 @@
 import { getFindings } from '../lib/collections/findings';
 import type { Finding } from '../lib/collections/findings';
 const findings = getFindings();
+const categories = [...new Set(findings.map(f => f.category))];
+const platforms = [...new Set(findings.map(f => f.platform).filter(Boolean))];
 const stats = {
   findings: findings.length,
   projects: 7,
@@ -16,73 +18,122 @@ const stats = {
 ---
 
 <div class="space-y-12">
-  {/* Hero */}
-  <div class="text-center py-16">
-    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 text-accent text-sm font-mono mb-6">
+  {/* Hero Section with Logo Placeholder */}
+  <div class="text-center py-12">
+    {/* Logo Area - Replace with actual logo when provided */}
+    <div class="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/30 mb-6 relative group cursor-pointer hover:border-accent/50 transition-all">
+      {/* Placeholder icon */}
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+      {/* Hover hint */}
+      <div class="absolute inset-0 rounded-2xl bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <span class="text-xs text-accent font-mono">LOGO</span>
+      </div>
+    </div>
+    
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 text-accent text-sm font-mono mb-4">
       <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
       PERSONAL KNOWLEDGE OS
     </div>
-    <h1 class="text-5xl md:text-7xl font-bold text-primary mb-6 tracking-tight">
+    <h1 class="text-6xl md:text-8xl font-bold text-primary mb-4 tracking-tight">
       NEXUS
     </h1>
     <p class="text-xl text-secondary max-w-2xl mx-auto mb-8">
       Capture what you discover. Connect what you know.
     </p>
-    <div class="max-w-md mx-auto">
-      <input type="text" placeholder="Search your knowledge..." class="input w-full text-base" />
+    
+    {/* Search Bar */}
+    <div class="max-w-2xl mx-auto relative">
+      <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+      <input 
+        type="text" 
+        id="search-input"
+        placeholder="Search your knowledge..." 
+        class="input w-full pl-12 pr-4 py-4 text-base"
+        autocomplete="off"
+      />
+      <div id="search-results" class="absolute top-full left-0 right-0 mt-2 bg-surface border border-white/10 rounded-xl shadow-2xl max-h-96 overflow-y-auto hidden z-50">
+        {/* Results will be injected here */}
+      </div>
+      <div class="text-xs text-muted font-mono mt-2">
+        Press <kbd class="px-2 py-0.5 bg-surface-secondary rounded text-muted">/</kbd> to search · <kbd class="px-2 py-0.5 bg-surface-secondary rounded text-muted">Esc</kbd> to close
+      </div>
     </div>
   </div>
 
   {/* Stats */}
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div class="card text-center">
+    <div class="card text-center group hover:border-accent/30 transition-all cursor-pointer">
       <div class="stat-value">{stats.findings}</div>
       <div class="stat-label">Findings</div>
     </div>
-    <div class="card text-center">
+    <div class="card text-center group hover:border-accent/30 transition-all cursor-pointer">
       <div class="stat-value">{stats.projects}</div>
       <div class="stat-label">Projects</div>
     </div>
-    <div class="card text-center">
+    <div class="card text-center group hover:border-accent/30 transition-all cursor-pointer">
       <div class="stat-value">{stats.websites}</div>
       <div class="stat-label">Websites</div>
     </div>
-    <div class="card text-center">
+    <div class="card text-center group hover:border-accent/30 transition-all cursor-pointer">
       <div class="stat-value">{stats.thisWeek}</div>
       <div class="stat-label">This Week</div>
     </div>
   </div>
 
+  {/* Quick Filter Buttons */}
+  <div class="flex flex-wrap gap-3 justify-center">
+    <button class="filter-btn active" data-filter="all">All</button>
+    {categories.map(cat => (
+      <button class="filter-btn" data-filter={cat}>{cat}</button>
+    ))}
+    <button class="filter-btn" data-filter="macOS">macOS</button>
+    <button class="filter-btn" data-filter="Windows">Windows</button>
+    <button class="filter-btn" data-filter="Cross-platform">Cross-platform</button>
+  </div>
+
   {/* Recent Discoveries */}
   <div>
-    <h2 class="section-title flex items-center gap-2">
+    <h2 class="section-title flex items-center gap-2 mb-6">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
       Recent Discoveries
     </h2>
-    <div class="grid gap-4">
-      {findings.slice(0, 3).map((finding: Finding) => (
-        <a href={`https://minjarul1.github.io/nexus/findings/${finding.slug}`} class="card hover:border-accent/30 transition-all">
+    <div id="findings-grid" class="grid gap-4">
+      {findings.map((finding: Finding) => (
+        <a href={`https://minjarul1.github.io/nexus/findings/${finding.slug}`} class="card hover:border-accent/30 transition-all finding-item" data-category={finding.category} data-platform={finding.platform}>
           <div class="flex items-start justify-between">
-            <div>
-              <div class="flex items-center gap-2 mb-2">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
                 <span class="tag accent">{finding.category}</span>
+                {finding.platform && <span class="tag">{finding.platform}</span>}
                 <span class="text-xs text-muted font-mono">{finding.date}</span>
               </div>
               <h3 class="text-lg font-semibold text-primary mb-1">{finding.title}</h3>
               <div class="flex flex-wrap gap-2 mt-2">
                 {finding.tags.slice(0, 3).map((tag: string) => (
-                  <span class="tag">{tag}</span>
+                  <span class="tag text-xs">{tag}</span>
                 ))}
               </div>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-muted ml-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
           </div>
         </a>
       ))}
+    </div>
+    <div id="no-results" class="hidden text-center py-12 text-muted">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p>No results found</p>
     </div>
   </div>
 
@@ -110,35 +161,159 @@ const stats = {
             <div class="text-secondary text-sm">NEXUS knowledge system</div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  {/* Projects */}
-  <div>
-    <h2 class="section-title flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-      </svg>
-      Active Projects
-    </h2>
-    <div class="grid md:grid-cols-2 gap-4">
-      <div class="card">
-        <div class="flex items-start justify-between mb-3">
-          <h3 class="font-semibold text-primary">NEXUS - Personal Knowledge OS</h3>
-          <span class="tag accent text-xs">Active</span>
-        </div>
-        <div class="w-full bg-surface-secondary rounded-full h-2 mb-2">
-          <div class="bg-accent h-2 rounded-full" style="width: 45%"></div>
-        </div>
-        <div class="flex items-center justify-between text-sm">
-          <span class="text-muted">45% complete</span>
-          <div class="flex gap-2">
-            <span class="tag text-xs">#astro</span>
-            <span class="tag text-xs">#tailwind</span>
+        <div class="flex gap-4">
+          <span class="text-muted font-mono text-sm">14:30</span>
+          <div class="flex-1">
+            <div class="text-primary">Added Pearcleaner</div>
+            <div class="text-secondary text-sm">macOS app cleaner tool</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  // Search functionality
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const findingsGrid = document.getElementById('findings-grid');
+  const noResults = document.getElementById('no-results');
+  
+  const allFindings = [
+    { slug: 'openai-gpt4o-mini', title: 'OpenAI GPT-4o Mini', category: 'AI', platform: 'Cross-platform', tags: ['ai', 'openai', 'multimodal'] },
+    { slug: 'local-ai-ollama', title: 'Local AI with Ollama', category: 'AI', platform: 'Cross-platform', tags: ['ai', 'local'] },
+    { slug: 'filesync-app', title: 'FileSync', category: 'Tools', platform: 'Cross-platform', tags: ['filesync', 'cloud-storage'] },
+    { slug: 'get-office-365', title: 'Get Office 365', category: 'Tools', platform: 'Windows', tags: ['office365', 'windows'] },
+    { slug: 'ext-torrents', title: 'EXT.to', category: 'Tools', platform: 'Cross-platform', tags: ['torrent', 'search'] },
+    { slug: 'pearcleaner', title: 'Pearcleaner', category: 'Tools', platform: 'macOS', tags: ['macOS', 'cleaner'] }
+  ];
+
+  // Keyboard shortcut
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+    if (e.key === 'Escape') {
+      searchInput.blur();
+      searchResults.classList.add('hidden');
+    }
+  });
+
+  // Search input handler
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    
+    if (query.length === 0) {
+      searchResults.classList.add('hidden');
+      return;
+    }
+
+    const results = allFindings.filter(f => 
+      f.title.toLowerCase().includes(query) ||
+      f.category.toLowerCase().includes(query) ||
+      f.tags.some(tag => tag.toLowerCase().includes(query))
+    );
+
+    if (results.length === 0) {
+      searchResults.innerHTML = '<div class="p-4 text-muted text-sm">No results found</div>';
+    } else {
+      searchResults.innerHTML = results.map(f => `
+        <a href="/nexus/findings/${f.slug}" class="block p-4 hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors">
+          <div class="flex items-center gap-3">
+            <span class="tag accent text-xs">${f.category}</span>
+            ${f.platform ? `<span class="tag text-xs">${f.platform}</span>` : ''}
+            <div class="flex-1">
+              <div class="text-primary font-medium">${f.title}</div>
+              <div class="text-xs text-muted mt-1">${f.tags.join(' · ')}</div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+      `).join('');
+    }
+    
+    searchResults.classList.remove('hidden');
+  });
+
+  // Close search when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+      searchResults.classList.add('hidden');
+    }
+  });
+
+  // Filter buttons
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const findingItems = document.querySelectorAll('.finding-item');
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active state
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const filter = btn.dataset.filter;
+      
+      findingItems.forEach(item => {
+        const category = item.dataset.category;
+        const platform = item.dataset.platform;
+        
+        if (filter === 'all' || category === filter || platform === filter) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+      
+      // Show/hide no results message
+      const visibleItems = document.querySelectorAll('.finding-item:not(.hidden)');
+      if (visibleItems.length === 0) {
+        noResults?.classList.remove('hidden');
+      } else {
+        noResults?.classList.add('hidden');
+      }
+    });
+  });
+</script>
+
+<style>
+  .filter-btn {
+    padding: 8px 20px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    background: #111720;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #8B95A5;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .filter-btn:hover {
+    border-color: rgba(255,255,255,0.3);
+    color: #F5F7FA;
+  }
+  
+  .filter-btn.active {
+    background: rgba(0,229,255,0.1);
+    border-color: rgba(0,229,255,0.3);
+    color: #00E5FF;
+  }
+  
+  #search-input:focus {
+    border-color: rgba(0,229,255,0.5);
+    box-shadow: 0 0 0 1px rgba(0,229,255,0.5);
+  }
+  
+  .finding-item {
+    transition: all 0.2s;
+  }
+  
+  .finding-item.hidden {
+    display: none;
+  }
+</style>
