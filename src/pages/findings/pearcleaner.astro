@@ -1,112 +1,29 @@
 ---
-layout: '../../layouts/BaseLayout.astro'
-title: "Pearcleaner - macOS App Cleaner"
+import FindingCard from '../../components/FindingCard.astro';
 ---
 
-<article class="max-w-3xl space-y-8">
-  {/* Back button */}
-  <a href="/findings" class="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-    </svg>
-    Back to Findings
-  </a>
-
-  {/* Header */}
-  <div>
-    <div class="flex items-center gap-3 mb-4">
-      <span class="tag accent">Tools</span>
-      <span class="text-sm text-muted font-mono">2026-09-19</span>
-    </div>
-    <h1 class="text-4xl font-bold text-primary mb-4">Pearcleaner</h1>
-    <div class="flex items-center gap-4 text-sm text-muted">
-      <span class="flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-        </svg>
-        Source: GitHub
-      </span>
-      <a href="https://github.com/alienator88/Pearcleaner" target="_blank" class="flex items-center gap-1 text-accent hover:underline">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-        </svg>
-        View on GitHub
-      </a>
-    </div>
-  </div>
-
-  {/* Content */}
-  <div class="prose prose-invert max-w-none">
-    <p class="text-lg text-secondary leading-relaxed">
-      A free, source-available macOS app cleaner for complete application uninstallation, orphaned file search, and system cleanup.
-    </p>
-    
-    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
-      Key Features
-    </h2>
-    <ul class="space-y-2 text-secondary">
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Complete app uninstall with orphaned file search</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Drag/drop, CLI support, and deep link automation</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Finder Extension for right-click uninstall</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Prune unused translations and strip unneeded architectures</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Sentinel Monitor: automatic cleanup when apps hit Trash (~2MB RAM)</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Theme system with custom colors</span>
-      </li>
-    </ul>
-    
-    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
-      Requirements
-    </h2>
-    <p class="text-secondary">
-      Full Disk permission required for file search. Privileged Helper needed for system folder operations. Supports macOS 13.0 (Ventura) and later.
-    </p>
-    
-    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
-      Project Status
-    </h2>
-    <p class="text-secondary">
-      Development is currently on hold since end of 2025 due to developer's new job and lack of access to Mac development hardware. The app remains functional and available for download.
-    </p>
-    
-    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
-      Installation
-    </h2>
-    <pre class="bg-surface-secondary p-4 rounded-lg font-mono text-sm"><code># Homebrew
-brew install --cask pearcleaner</code></pre>
-  </div>
-
-  {/* Tags */}
-  <div class="pt-6 border-t border-white/10">
-    <div class="flex flex-wrap gap-2">
-      <span class="tag accent">#macOS</span>
-      <span class="tag accent">#cleaner</span>
-      <span class="tag accent">#uninstaller</span>
-      <span class="tag accent">#swift</span>
-    </div>
-  </div>
-
-  {/* Meta */}
-  <div class="text-sm text-muted font-mono pt-4">
-    <div class="flex items-center gap-4">
-      <span>DISCOVERED: 2026-09-19</span>
-      <span>NX-006</span>
-    </div>
-  </div>
-</article>
+<FindingCard
+  title="Pearcleaner - macOS App Cleaner"
+  description="Free macOS app cleaner for complete application uninstallation and system cleanup."
+  category="Tools"
+  platform="macOS"
+  date="2026-09-19"
+  slug="pearcleaner"
+  website="https://github.com/alienator88/Pearcleaner"
+  id="NX-006"
+  tags={["macos", "cleaner", "uninstaller", "swift"]}
+  features={[
+    "Complete app uninstall with orphaned file search",
+    "Drag/drop, CLI support, and deep link automation",
+    "Finder Extension for right-click uninstall",
+    "Prune unused translations and strip unneeded architectures",
+    "Sentinel Monitor: automatic cleanup when apps hit Trash",
+    "Theme system with custom colors",
+  ]}
+  content={[
+    "A free, source-available macOS app cleaner for complete application uninstallation, orphaned file search, and system cleanup.",
+    "Full Disk permission required for file search. Privileged Helper needed for system folder operations. Supports macOS 13.0 (Ventura) and later.",
+    "Development is currently on hold since end of 2025 due to developer's new job and lack of access to Mac development hardware. The app remains functional and available for download.",
+    "Installation: `brew install --cask pearcleaner`",
+  ]}
+/>

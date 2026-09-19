@@ -1,90 +1,25 @@
 ---
-layout: '../../layouts/BaseLayout.astro'
-title: "EXT.to - Torrent Search Engine"
+import FindingCard from '../../components/FindingCard.astro';
 ---
 
-<article class="max-w-3xl space-y-8">
-  {/* Back button */}
-  <a href="/findings" class="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-    </svg>
-    Back to Findings
-  </a>
-
-  {/* Header */}
-  <div>
-    <div class="flex items-center gap-3 mb-4">
-      <span class="tag accent">Tools</span>
-      <span class="text-sm text-muted font-mono">2026-09-19</span>
-    </div>
-    <h1 class="text-4xl font-bold text-primary mb-4">EXT.to</h1>
-    <div class="flex items-center gap-4 text-sm text-muted">
-      <span class="flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-        </svg>
-        Source: ext.to
-      </span>
-      <a href="https://ext.to/" target="_blank" class="flex items-center gap-1 text-accent hover:underline">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-        </svg>
-        Visit Website
-      </a>
-    </div>
-  </div>
-
-  {/* Content */}
-  <div class="prose prose-invert max-w-none">
-    <p class="text-lg text-secondary leading-relaxed">
-      EXT.to is a lightweight torrent search engine that aggregates magnet links from multiple sources, providing a clean interface for discovering movies, TV shows, software, games, and more.
-    </p>
-    
-    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
-      Key Features
-    </h2>
-    <ul class="space-y-2 text-secondary">
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Aggregates torrents from multiple sources</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Simple, clean search interface</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Covers movies, TV shows, software, games</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Shows file size, seeders, upload date</span>
-      </li>
-    </ul>
-    
-    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
-      Use Cases
-    </h2>
-    <p class="text-secondary">
-      Useful for quickly finding specific torrents without visiting multiple sites. Good for discovering anime, movies, and software releases.
-    </p>
-  </div>
-
-  {/* Tags */}
-  <div class="pt-6 border-t border-white/10">
-    <div class="flex flex-wrap gap-2">
-      <span class="tag accent">#torrent</span>
-      <span class="tag accent">#search</span>
-      <span class="tag accent">#downloads</span>
-    </div>
-  </div>
-
-  {/* Meta */}
-  <div class="text-sm text-muted font-mono pt-4">
-    <div class="flex items-center gap-4">
-      <span>DISCOVERED: 2026-09-19</span>
-      <span>NX-005</span>
-    </div>
-  </div>
-</article>
+<FindingCard
+  title="EXT.to - Torrent Search Engine"
+  description="Lightweight torrent search engine that aggregates magnet links from multiple sources."
+  category="Tools"
+  platform="Cross-platform"
+  date="2026-09-19"
+  slug="ext-torrents"
+  website="https://ext.to/"
+  id="NX-005"
+  tags={["torrent", "search", "downloads"]}
+  features={[
+    "Aggregates torrents from multiple sources",
+    "Simple, clean search interface",
+    "Covers movies, TV shows, software, games",
+    "Shows file size, seeders, upload date",
+  ]}
+  content={[
+    "EXT.to is a lightweight torrent search engine that aggregates magnet links from multiple sources, providing a clean interface for discovering movies, TV shows, software, games, and more.",
+    "Useful for quickly finding specific torrents without visiting multiple sites. Good for discovering anime, movies, and software releases.",
+  ]}
+/>

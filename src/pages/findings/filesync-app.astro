@@ -1,90 +1,24 @@
 ---
-layout: '../../layouts/BaseLayout.astro'
-title: "FileSync - File Syncing Service"
+import FindingCard from '../../components/FindingCard.astro';
 ---
 
-<article class="max-w-3xl space-y-8">
-  {/* Back button */}
-  <a href="/findings" class="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-    </svg>
-    Back to Findings
-  </a>
-
-  {/* Header */}
-  <div>
-    <div class="flex items-center gap-3 mb-4">
-      <span class="tag accent">Tools</span>
-      <span class="text-sm text-muted font-mono">2026-09-19</span>
-    </div>
-    <h1 class="text-4xl font-bold text-primary mb-4">FileSync</h1>
-    <div class="flex items-center gap-4 text-sm text-muted">
-      <span class="flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-        </svg>
-        Source: FileSync.app
-      </span>
-      <a href="https://filesync.app/" target="_blank" class="flex items-center gap-1 text-accent hover:underline">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-        </svg>
-        Visit Website
-      </a>
-    </div>
-  </div>
-
-  {/* Content */}
-  <div class="prose prose-invert max-w-none">
-    <p class="text-lg text-secondary leading-relaxed">
-      FileSync is a cloud-based file synchronization service for seamless cross-device file management and automated backups.
-    </p>
-    
-    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
-      Key Features
-    </h2>
-    <ul class="space-y-2 text-secondary">
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Real-time file synchronization across devices</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Automated cloud backup solutions</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>Cross-platform support (Windows, Mac, Linux)</span>
-      </li>
-      <li class="flex items-start gap-2">
-        <span class="text-accent">-</span>
-        <span>End-to-end encryption for secure transfers</span>
-      </li>
-    </ul>
-    
-    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
-      Use Cases
-    </h2>
-    <p class="text-secondary">
-      Great for keeping project files in sync between home and work machines, or as a secondary backup for important documents alongside your primary cloud storage.
-    </p>
-  </div>
-
-  {/* Tags */}
-  <div class="pt-6 border-t border-white/10">
-    <div class="flex flex-wrap gap-2">
-      <span class="tag accent">#filesync</span>
-      <span class="tag accent">#cloud-storage</span>
-      <span class="tag accent">#sync-tools</span>
-    </div>
-  </div>
-
-  {/* Meta */}
-  <div class="text-sm text-muted font-mono pt-4">
-    <div class="flex items-center gap-4">
-      <span>DISCOVERED: 2026-09-19</span>
-      <span>NX-003</span>
-    </div>
-  </div>
-</article>
+<FindingCard
+  title="FileSync - File Syncing Service"
+  description="Cloud-based file synchronization service for seamless cross-device file management and automated backups."
+  category="Tools"
+  platform="Cross-platform"
+  date="2026-09-19"
+  slug="filesync-app"
+  website="https://filesync.app/"
+  id="NX-003"
+  tags={["filesync", "cloud-storage", "sync-tools"]}
+  features={[
+    "Real-time file synchronization across devices",
+    "Automated cloud backup solutions",
+    "Cross-platform support (Windows, Mac, Linux)",
+    "End-to-end encryption for secure transfers",
+  ]}
+  content={[
+    "Great for keeping project files in sync between home and work machines, or as a secondary backup for important documents alongside your primary cloud storage.",
+  ]}
+/>
