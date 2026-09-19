@@ -53,6 +53,15 @@ const findings: Finding[] = [
     date: '2026-09-19',
     importance: 'low',
     url: 'https://ext.to/'
+  },
+  {
+    slug: 'pearcleaner',
+    title: 'Pearcleaner - macOS App Cleaner',
+    category: 'Tools',
+    tags: ['macOS', 'cleaner', 'uninstaller', 'swift'],
+    date: '2026-09-19',
+    importance: 'medium',
+    url: 'https://github.com/alienator88/Pearcleaner'
   }
 ];
 
