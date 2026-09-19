@@ -1,14 +1,14 @@
 ---
 const navItems = [
-  { href: '/', label: 'Home', section: 'discover' },
-  { href: '/findings', label: 'Findings', section: 'discover' },
-  { href: '/today', label: 'Today', section: 'discover' },
-  { href: '/important', label: 'Important', section: 'discover' },
-  { href: '/library', label: 'Websites', section: 'library' },
-  { href: '/library?cat=tools', label: 'Tools', section: 'library' },
-  { href: '/library?cat=articles', label: 'Articles', section: 'library' },
-  { href: '/projects', label: 'Projects', section: 'workspace' },
-  { href: '/ideas', label: 'Ideas', section: 'workspace' },
+  { href: '/nexus/', label: 'Home', section: 'discover' },
+  { href: '/nexus/findings', label: 'Findings', section: 'discover' },
+  { href: '/nexus/today', label: 'Today', section: 'discover' },
+  { href: '/nexus/important', label: 'Important', section: 'discover' },
+  { href: '/nexus/library', label: 'Websites', section: 'library' },
+  { href: '/nexus/library?cat=tools', label: 'Tools', section: 'library' },
+  { href: '/nexus/library?cat=articles', label: 'Articles', section: 'library' },
+  { href: '/nexus/projects', label: 'Projects', section: 'workspace' },
+  { href: '/nexus/ideas', label: 'Ideas', section: 'workspace' },
 ];
 const currentPage = Astro.url.pathname;
 ---
@@ -37,7 +37,7 @@ const currentPage = Astro.url.pathname;
     
     <div class="space-y-1 px-2">
       {navItems.map(item => {
-        const isActive = currentPage === item.href || (item.href !== '/' && currentPage.startsWith(item.href));
+        const isActive = currentPage === item.href || (item.href !== '/nexus/' && currentPage.startsWith(item.href));
         return (
           <a 
             href={item.href} 
