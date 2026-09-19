@@ -2,29 +2,41 @@
 const currentPage = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-white/10 px-6 py-4">
-  <div class="flex items-center justify-between max-w-7xl mx-auto">
-    <div class="flex items-center gap-4">
-      <button id="mobile-menu-btn" class="md:hidden text-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-      <div class="hidden md:flex items-center gap-2 text-sm text-muted font-mono">
-        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-        SYSTEM ONLINE
-        <span class="text-white/20">|</span>
-        <span>NX-{new Date().getFullYear()}-{String(Math.floor(Math.random() * 9999)).padStart(4, '0')}</span>
+<header class="header glass sticky top-0 z-40 border-b border-white/10">
+  <div class="header-inner max-w-[1400px] mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      {/* Left: Mobile Menu + Status */}
+      <div class="flex items-center gap-4">
+        <button 
+          id="mobile-menu-btn" 
+          class="mobile-menu-btn md:hidden btn-ghost p-2"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        
+        <div class="hidden md:flex items-center gap-3 text-xs font-mono text-muted">
+          <span class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
+            SYSTEM ONLINE
+          </span>
+          <span class="text-white/20">|</span>
+          <span>NX-{new Date().getFullYear()}-{String(Math.floor(Math.random() * 9999)).padStart(4, '0')}</span>
+        </div>
       </div>
-    </div>
-    
-    <div class="flex items-center gap-4">
-      <a href="/quick-add" class="btn-secondary text-sm px-4 py-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-        </svg>
-        Add New
-      </a>
+      
+      {/* Right: Actions */}
+      <div class="flex items-center gap-3">
+        <a href="/quick-add" class="btn-primary text-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          <span class="hidden sm:inline">Add New</span>
+        </a>
+      </div>
     </div>
   </div>
 </header>
@@ -35,10 +47,44 @@ const currentPage = Astro.url.pathname;
   
   if (btn && sidebar) {
     btn.addEventListener('click', () => {
-      sidebar?.classList.toggle('hidden');
-      sidebar?.classList.toggle('fixed');
-      sidebar?.classList.toggle('inset-0');
-      sidebar?.classList.toggle('w-full');
+      const isOpen = sidebar.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!sidebar.contains(e.target) && !btn.contains(e.target) && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 </script>
+
+<style>
+  .glass {
+    background: rgba(13, 17, 23, 0.72);
+    backdrop-filter: blur(20px);
+  }
+  
+  .header {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .mobile-menu-btn {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .mobile-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>
