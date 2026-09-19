@@ -1,0 +1,87 @@
+---
+layout: '../../layouts/BaseLayout.astro'
+title: "Your Finding Title"
+---
+
+<article class="max-w-3xl space-y-8">
+  {/* Back button */}
+  <a href="/findings" class="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+    Back to Findings
+  </a>
+
+  {/* Header */}
+  <div>
+    <div class="flex items-center gap-3 mb-4">
+      <span class="tag accent">Category</span>
+      <span class="text-sm text-muted font-mono">2026-09-19</span>
+      <span class="tag flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+        Important
+      </span>
+    </div>
+    <h1 class="text-4xl font-bold text-primary mb-4">Your Finding Title Here</h1>
+    <div class="flex items-center gap-4 text-sm text-muted">
+      <span class="flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+        Source: Your Source
+      </span>
+      <a href="https://example.com" target="_blank" class="flex items-center gap-1 text-accent hover:underline">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+        Visit Source
+      </a>
+    </div>
+  </div>
+
+  {/* Content */}
+  <div class="prose prose-invert max-w-none">
+    <p class="text-lg text-secondary leading-relaxed">
+      Start writing your findings here...
+    </p>
+    
+    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
+      Key Points
+    </h2>
+    <ul class="space-y-2 text-secondary">
+      <li class="flex items-start gap-2">
+        <span class="text-accent">-</span>
+        <span>Your first point here</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-accent">-</span>
+        <span>Your second point here</span>
+      </li>
+    </ul>
+    
+    <h2 class="text-xl font-semibold text-primary mt-8 mb-4 flex items-center gap-2">
+      Personal Notes
+    </h2>
+    <p class="text-secondary">
+      Add your personal notes here...
+    </p>
+  </div>
+
+  {/* Tags */}
+  <div class="pt-6 border-t border-white/10">
+    <div class="flex flex-wrap gap-2">
+      <span class="tag accent">#tag1</span>
+      <span class="tag accent">#tag2</span>
+    </div>
+  </div>
+
+  {/* Meta */}
+  <div class="text-sm text-muted font-mono pt-4">
+    <div class="flex items-center gap-4">
+      <span>DISCOVERED: 2026-09-19</span>
+      <span>NX-003</span>
+    </div>
+  </div>
+</article>
