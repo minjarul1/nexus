@@ -61,6 +61,16 @@ const findings: Finding[] = [
     url: 'https://ext.to/'
   },
   {
+    slug: 'github-treasures',
+    title: 'GitHub Treasures - Curated Open Source Projects',
+    category: 'Tools',
+    platform: 'Web',
+    tags: ['github', 'open-source', 'curation', 'discovery', 'developer-tools'],
+    date: '2026-09-22',
+    importance: 'medium',
+    url: 'https://github-treasure.vercel.app/'
+  },
+  {
     slug: 'pearcleaner',
     title: 'Pearcleaner - macOS App Cleaner',
     category: 'Tools',
